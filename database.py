@@ -28,19 +28,19 @@ def salvar_no_postgres(dados: Vendas):
 
         #Inserção dos dados na tabela de vendas
         insert_query = sql.SQL(
-            "INSERT INTO vendas (email,data,valor, quantidade, produto) VALUES (%s,)"
+            "INSERT INTO vendas (email,data,valor, quantidade, produto) VALUES (%s,%s,%s,%s,%s)"
         )
         cursor.execute(insert_query,(
             dados.email,
             dados.data,
             dados.valor,
             dados.quantidade,
-            dados.produto.value
+            dados.produto
         ))
         conn.commit()
         cursor.close()
         conn.close()
-        st.sucess("Dados salvos com sucesso no banco de dados!")
+        st.success("Dados salvos com sucesso no banco de dados!")
     except Exception as e:
-        st.erro(f"Erro ao salvar no banco de dados: {e}")
+        st.error(f"Erro ao salvar no banco de dados: {e}")
         
